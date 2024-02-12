@@ -3,7 +3,7 @@ import streamlit as st
 
 
 
-openai.api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
 openai.api_version = "2023-07-01-preview"
 openai.api_type = "azure"
@@ -17,7 +17,7 @@ GPT_CHAT_ENGINE = "gepeto"
 # GPT_CHAT_ENGINE = "dictador"
 
 
-st.title(st.secrets["OPENAI_API_KEY"])
+st.title("Chatbot")
 
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
