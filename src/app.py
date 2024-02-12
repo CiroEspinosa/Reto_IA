@@ -7,12 +7,14 @@ import streamlit as st
 load_dotenv()
 
 client = OpenAI(
-  api_key = os.getenv("OPENAI_API_KEY"),
+  api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
+)
+"""
+os.getenv("OPENAI_API_KEY"),
   api_base_url = os.getenv("OPENAI_API_BASE"),
   api_version = os.getenv("OPENAI_API_VERSION"),
   api_type = os.getenv("OPENAI_API_TYPE")
-)
-
+  """
 EMBEDDING_MODEL = "text-embedding-ada-002"
 GPT_EMBEDDING_ENGINE = 'mondongodb'
 DIMENSION = 1536
