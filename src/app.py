@@ -9,7 +9,7 @@ load_dotenv()
 
 
 openai.api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
-openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
+#openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
 openai.api_version = "2023-07-01-preview"
 openai.api_type = "azure"
 
