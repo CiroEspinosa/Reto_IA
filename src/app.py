@@ -22,7 +22,7 @@ GPT_MODEL = 'gpt-4'
 GPT_CHAT_ENGINE = "dictador"
 
 
-st.title(os.getenv("OPENAI_API_KEY"))
+st.title("chat")
 
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
