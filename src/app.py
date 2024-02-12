@@ -9,7 +9,7 @@ load_dotenv()
 
 
 openai.api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
-#openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
+openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
 openai.api_version = "2023-07-01-preview"
 openai.api_type = "azure"
 
@@ -34,12 +34,12 @@ if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
 
-  response = openai.ChatCompletion.create(
+  response = openai.chat.completions.create(
         model=GPT_MODEL,
         messages=st.session_state["messages"],
         engine=GPT_CHAT_ENGINE
     )
   
-  responseMessage = response['choices'][0]['message']['content']
+  responseMessage = response.choices[0].message.content
   st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
   st.chat_message("assistant").write(responseMessage)
