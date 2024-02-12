@@ -8,9 +8,6 @@ load_dotenv()
 
 client = OpenAI(
   api_key = os.getenv("OPENAI_API_KEY"),
-  api_base_url = os.getenv("OPENAI_API_BASE"),
-  api_version = os.getenv("OPENAI_API_VERSION"),
-  api_type = os.getenv("OPENAI_API_TYPE")
 )
 
 EMBEDDING_MODEL = "text-embedding-ada-002"
