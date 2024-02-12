@@ -8,7 +8,7 @@ load_dotenv()
 
 
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
 openai.api_base_url = os.getenv("OPENAI_API_BASE")
 openai.api_version = os.getenv("OPENAI_API_VERSION")
 openai.api_type = os.getenv("OPENAI_API_TYPE")
