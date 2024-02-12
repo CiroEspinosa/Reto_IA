@@ -7,15 +7,12 @@ import streamlit as st
 load_dotenv()
 
 
-client = OpenAI(
-  api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
-)
-"""
-os.getenv("OPENAI_API_KEY"),
-  api_base_url = os.getenv("OPENAI_API_BASE"),
-  api_version = os.getenv("OPENAI_API_VERSION"),
-  api_type = os.getenv("OPENAI_API_TYPE")
-  """
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_base_url = os.getenv("OPENAI_API_BASE")
+openai.api_version = os.getenv("OPENAI_API_VERSION")
+openai.api_type = os.getenv("OPENAI_API_TYPE")
+
 EMBEDDING_MODEL = "text-embedding-ada-002"
 GPT_EMBEDDING_ENGINE = 'mondongodb'
 DIMENSION = 1536
@@ -23,6 +20,7 @@ GPT_MODEL = 'gpt-3.5-turbo-16k'
 GPT_CHAT_ENGINE = "gepeto"
 GPT_MODEL = 'gpt-4'
 GPT_CHAT_ENGINE = "dictador"
+
 
 st.title("Chatbot")
 
@@ -36,7 +34,7 @@ if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
 
-  response = client.chat.completions.create(
+  response = openai.ChatCompletion.create(
         model=GPT_MODEL,
         messages=st.session_state["messages"],
         engine=GPT_CHAT_ENGINE
