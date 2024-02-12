@@ -5,11 +5,12 @@ import streamlit as st
 
 
 load_dotenv()
+"""
 
 client = OpenAI(
   api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
 )
-"""
+
 os.getenv("OPENAI_API_KEY"),
   api_base_url = os.getenv("OPENAI_API_BASE"),
   api_version = os.getenv("OPENAI_API_VERSION"),
