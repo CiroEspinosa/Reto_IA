@@ -9,9 +9,9 @@ load_dotenv()
 
 
 openai.api_key = "4fdaeb2a8fda4d9a9c4d2f95a5f52b54"
-openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
-openai.api_version = "2023-07-01-preview"
-openai.api_type = "azure"
+#openai.api_base_url = "https://acc-alejandria-core-openaimagesound-pro.openai.azure.com"
+#openai.api_version = "2023-07-01-preview"
+#openai.api_type = "azure"
 
 EMBEDDING_MODEL = "text-embedding-ada-002"
 GPT_EMBEDDING_ENGINE = 'mondongodb'
@@ -34,10 +34,10 @@ if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
 
-  response = openai.chat.completions.create(
+  response = openai.ChatCompletion.create(
         model=GPT_MODEL,
         messages=st.session_state["messages"],
-        engine=GPT_CHAT_ENGINE
+        #engine=GPT_CHAT_ENGINE
     )
   
   responseMessage = response.choices[0].message.content
