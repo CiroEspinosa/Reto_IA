@@ -18,11 +18,11 @@ GPT_EMBEDDING_ENGINE = 'mondongodb'
 DIMENSION = 1536
 GPT_MODEL = 'gpt-3.5-turbo-16k'
 GPT_CHAT_ENGINE = "gepeto"
-GPT_MODEL = 'gpt-4'
-GPT_CHAT_ENGINE = "dictador"
+# GPT_MODEL = 'gpt-4'
+# GPT_CHAT_ENGINE = "dictador"
 
 
-st.title("chat")
+st.title(os.getenv("OPENAI_API_KEY"))
 
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
