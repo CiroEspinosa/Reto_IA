@@ -4,7 +4,7 @@ import streamlit as st
 
 api_key = st.secrets["OPENAI_API_KEY"]
 api_base = st.secrets["OPENAI_API_BASE"]
-api_version = st.secrets["OPEN_API_VERSION"]
+api_version = st.secrets["OPENAI_API_VERSION"]
 api_type = st.secrets["OPENAI_API_TYPE"]
 
 
