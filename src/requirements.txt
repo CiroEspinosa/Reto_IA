@@ -5,5 +5,4 @@ pinecone-client
 langchain
 unstructured
 langchain-community
-urllib3 chardet charset-normalizer
 pdf2image
