@@ -12,8 +12,7 @@ PINECONE_INDEX_NAME = st.secrets["PINECONE_INDEX_NAME"]
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
 
-pinecone.init(api_key=PINECONE_API_KEY)
-connector = pinecone.Index(index_name=PINECONE_INDEX_NAME)
+
 
 api_key = st.secrets["OPENAI_API_KEY"]
 api_base = st.secrets["OPENAI_API_BASE"]
