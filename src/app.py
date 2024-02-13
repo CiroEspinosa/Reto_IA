@@ -1,12 +1,16 @@
 import openai
 import streamlit as st
-import pinecone
+from pinecone import Pinecone, ServerlessSpec
+
+
 
 
 
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY_V2"]
 PINECONE_ENV = st.secrets["PINECONE_ENV"]
 PINECONE_INDEX_NAME = st.secrets["PINECONE_INDEX_NAME"]
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
 
 pinecone.init(api_key=PINECONE_API_KEY)
 connector = pinecone.Index(index_name=PINECONE_INDEX_NAME)
