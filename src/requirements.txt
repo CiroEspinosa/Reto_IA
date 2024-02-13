@@ -8,3 +8,4 @@ langchain-community
 pdf2image
 pikepdf
 pypdf
+pdfminer
