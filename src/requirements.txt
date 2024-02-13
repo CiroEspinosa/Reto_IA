@@ -6,3 +6,4 @@ langchain
 unstructured
 langchain-community
 pdf2image
+pikepdf
