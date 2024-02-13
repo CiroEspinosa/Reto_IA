@@ -5,7 +5,11 @@ pinecone-client
 langchain
 unstructured
 langchain-community
-pdf2image
-pikepdf
-pypdf
-pdfminer
+PyPDF2
+unstructured
+unstructured[local-inference]
+tiktoken
+uvicorn
+flask
+Werkzeug
+gunicorn
