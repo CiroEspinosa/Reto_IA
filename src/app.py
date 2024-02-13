@@ -6,6 +6,7 @@ import pinecone
 
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY_V2"]
 PINECONE_ENV = st.secrets["PINECONE_ENV"]
+PINECONE_INDEX_NAME = st.secrets["PINECONE_INDEX_NAME"]
 
 
 api_key = st.secrets["OPENAI_API_KEY"]
@@ -22,10 +23,10 @@ openai.api_type = api_type
 EMBEDDING_MODEL = "text-embedding-ada-002"
 GPT_EMBEDDING_ENGINE = 'mondongodb'
 DIMENSION = 1536
-GPT_MODEL = 'gpt-3.5-turbo-16k'
-GPT_CHAT_ENGINE = "gepeto"
-# GPT_MODEL = 'gpt-4'
-# GPT_CHAT_ENGINE = "dictador"
+# GPT_MODEL = 'gpt-3.5-turbo-16k'
+# GPT_CHAT_ENGINE = "gepeto"
+GPT_MODEL = 'gpt-4'
+GPT_CHAT_ENGINE = "dictador"
 
 
 st.title("Chatbot")
