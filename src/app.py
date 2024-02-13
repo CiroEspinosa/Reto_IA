@@ -4,7 +4,7 @@ import pinecone
 
 
 
-PINECONE_API_KEY = st.secrets["PINECONE_API_KEY "]
+PINECONE_API_KEY = st.secrets["PINECONE_API_KEY_V2"]
 PINECONE_ENV = st.secrets["PINECONE_ENV"]
 
 pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
