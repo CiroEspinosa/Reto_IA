@@ -1,7 +1,8 @@
 import openai
 import streamlit as st
+import pdf_gpt
 from pinecone import Pinecone, ServerlessSpec
-
+import os
 
 
 
@@ -13,6 +14,7 @@ PINECONE_INDEX_NAME = st.secrets["PINECONE_INDEX_NAME"]
 pc = Pinecone(api_key=PINECONE_API_KEY)
 
 
+ruta_pdf = os.path.join("pdf", "ConstitucionCASTELLANO.pdf")
 
 api_key = st.secrets["OPENAI_API_KEY"]
 api_base = st.secrets["OPENAI_API_BASE"]
@@ -47,10 +49,8 @@ if user_input := st.chat_input():
   st.chat_message("user").write(user_input)
 
   if is_pdf_chatbot:
-    """user_input_vector = my_vectorizer_function(user_input)
-    pinecone_result = connector.query(queries=[user_input_vector], top_k=5)
-    relevant_info_from_pdf = get_info_from_pinecone_result(pinecone_result)
-    responseMessage = relevant_info_from_pdf"""
+    docsearch = pdf_gpt.process_pdf(ruta_pdf,api_key)
+    responseMessage = pdf_gpt.get_answer(docsearch,user_input,api_key)
   else:
     response = openai.ChatCompletion.create(
         model=GPT_MODEL,
