@@ -49,7 +49,7 @@ if user_input := st.chat_input():
   st.chat_message("user").write(user_input)
 
   if is_pdf_chatbot:
-    docsearch = pdf_gpt.process_pdf(ruta_pdf,api_key)
+    docsearch = pdf_gpt.process_pdf(ruta_pdf,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME)
     responseMessage = pdf_gpt.get_answer(docsearch,user_input,api_key)
   else:
     response = openai.ChatCompletion.create(
