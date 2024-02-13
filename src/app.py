@@ -1,6 +1,13 @@
 import openai
 import streamlit as st
+import pinecone
 
+
+
+PINECONE_API_KEY = st.secrets["PINECONE_API_KEY "]
+PINECONE_ENV = st.secrets["PINECONE_ENV"]
+
+pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
 
 api_key = st.secrets["OPENAI_API_KEY"]
 api_base = st.secrets["OPENAI_API_BASE"]
@@ -23,7 +30,7 @@ GPT_CHAT_ENGINE = "gepeto"
 
 
 st.title("Chatbot")
-
+st.checkbox("PDF chatbot")
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 
