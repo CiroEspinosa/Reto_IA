@@ -48,8 +48,7 @@ if is_pdf_chatbot:
       docsearch = pdf_gpt.process_pdf(pdf_file,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME, DIMENSION)
       st.success("¡Archivo PDF procesado exitosamente!")
       pdf_file.close()
-  if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+  
 
 
 if "messages" not in st.session_state:
@@ -69,5 +68,10 @@ if user_input := st.chat_input():
       max_tokens=DIMENSION
   )
   responseMessage = response['choices'][0]['message']['content']
-  st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-  st.chat_message("assistant").write(responseMessage)
+  if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+    st.chat_message("assistant").write(responseMessage)
+  else:
+    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+    st.chat_message("assistant").write(responseMessage)
