@@ -39,19 +39,6 @@ if "messages" not in st.session_state:
 
 st.title("Chatbot")
 
-is_pdf_chatbot = st.sidebar.checkbox("PDF chatbot")
-
-if is_pdf_chatbot:
-  uploaded_file = st.sidebar.file_uploader("Sube tu archivo PDF", type="pdf")
-
-  if uploaded_file is not None:
-      pdf_bytes = uploaded_file.read()
-      pdf_file = BytesIO(pdf_bytes)
-      docsearch = pdf_gpt.process_pdf(pdf_file, api_key, PINECONE_API_KEY, PINECONE_ENV, PINECONE_INDEX_NAME, DIMENSION)
-      st.success("¡Archivo PDF procesado exitosamente!")
-      pdf_file.close()
-
-
 if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
@@ -70,4 +57,20 @@ if user_input := st.chat_input():
 
   st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
   st.chat_message("assistant").write(responseMessage)
+  
+is_pdf_chatbot = st.checkbox("PDF chatbot")
+uploaded_file = st.sidebar.file_uploader("Sube tu archivo PDF", type="pdf")
+
+if is_pdf_chatbot:
+  st.sidebar.open()
+
+  if uploaded_file is not None:
+      pdf_bytes = uploaded_file.read()
+      pdf_file = BytesIO(pdf_bytes)
+      docsearch = pdf_gpt.process_pdf(pdf_file, api_key, PINECONE_API_KEY, PINECONE_ENV, PINECONE_INDEX_NAME, DIMENSION)
+      st.success("¡Archivo PDF procesado exitosamente!")
+      pdf_file.close()
+
+
+
 
