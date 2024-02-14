@@ -48,7 +48,7 @@ if uploaded_file is not None:
   pdf_file.close()
 
 
-
+st.write()
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
   st.write()
