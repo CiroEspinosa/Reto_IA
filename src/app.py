@@ -40,13 +40,12 @@ uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
 
 
 
-
+if "messages" not in st.session_state:
+  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 
 for msg in st.session_state["messages"]:
   st.chat_message(msg["role"]).write(msg["content"])
-  
-if "messages" not in st.session_state:
-  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+
 
 if uploaded_file is not None:
     pdf_bytes = uploaded_file.read()
