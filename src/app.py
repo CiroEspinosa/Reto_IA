@@ -36,8 +36,8 @@ GPT_CHAT_ENGINE = "gepeto"
 
 
 st.title("Chatbot")
-x=False
-is_pdf_chatbot = st.checkbox("PDF chatbot",value=x)
+
+is_pdf_chatbot = st.checkbox("PDF chatbot")
 uploaded_file = st.sidebar.file_uploader("Sube tu archivo PDF", type="pdf")
 
 if uploaded_file is not None:
@@ -47,15 +47,13 @@ if uploaded_file is not None:
   st.success("¡Archivo PDF procesado exitosamente!")
   pdf_file.close()
 
+st.experimental_rerun()
 
 if "messages" not in st.session_state:
-  x=True
-  x=False
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 else:
   for msg in st.session_state["messages"]:
     st.chat_message(msg["role"]).write(msg["content"])
-
 
   if user_input := st.chat_input():
     st.session_state["messages"].append({"role": "user", "content": user_input})
