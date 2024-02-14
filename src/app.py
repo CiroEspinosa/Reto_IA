@@ -35,7 +35,7 @@ GPT_CHAT_ENGINE = "gepeto"
   
 
 st.title("Chatbot")
-
+is_pdf_chatbot = st.checkbox("PDF chatbot")
 uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
 
 
