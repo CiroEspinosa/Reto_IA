@@ -47,7 +47,7 @@ if uploaded_file is not None:
   st.success("¡Archivo PDF procesado exitosamente!")
   pdf_file.close()
 
-st.experimental_rerun()
+
 
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
