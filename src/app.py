@@ -53,7 +53,7 @@ if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
 
-  """if is_pdf_chatbot and uploaded_file is not None:
+  if is_pdf_chatbot and uploaded_file is not None:
     responseMessage = pdf_gpt.get_answer(docsearch,user_input,api_key)
   else:
     response = openai.ChatCompletion.create(
@@ -62,7 +62,7 @@ if user_input := st.chat_input():
         engine=GPT_CHAT_ENGINE,
         max_tokens=DIMENSION
     )
-    responseMessage = response['choices'][0]['message']['content']"""
+    responseMessage = response['choices'][0]['message']['content']
   response = openai.ChatCompletion.create(
         model=GPT_MODEL,
         messages=st.session_state["messages"],
