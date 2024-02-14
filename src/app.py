@@ -68,10 +68,11 @@ if user_input := st.chat_input():
       max_tokens=DIMENSION
   )
   responseMessage = response['choices'][0]['message']['content']
-  if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+  if "messages" in st.session_state:
     st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
     st.chat_message("assistant").write(responseMessage)
   else:
+    st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
     st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
     st.chat_message("assistant").write(responseMessage)
+    
