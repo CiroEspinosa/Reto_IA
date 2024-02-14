@@ -39,7 +39,7 @@ uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
 if uploaded_file is not None:
     pdf_bytes = uploaded_file.read()
     pdf_file = BytesIO(pdf_bytes)
-    #docsearch = pdf_gpt.process_pdf(pdf_file,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME, DIMENSION)
+    docsearch = pdf_gpt.process_pdf(pdf_file,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME, DIMENSION)
     st.success("¡Archivo PDF procesado exitosamente!")
     pdf_file.close()
 
@@ -57,13 +57,6 @@ if user_input := st.chat_input():
     responseMessage = pdf_gpt.get_answer(docsearch,user_input,api_key)
   else:
     response = openai.ChatCompletion.create(
-        model=GPT_MODEL,
-        messages=st.session_state["messages"],
-        engine=GPT_CHAT_ENGINE,
-        max_tokens=DIMENSION
-    )
-    responseMessage = response['choices'][0]['message']['content']
-  response = openai.ChatCompletion.create(
         model=GPT_MODEL,
         messages=st.session_state["messages"],
         engine=GPT_CHAT_ENGINE,
