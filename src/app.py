@@ -31,9 +31,6 @@ GPT_CHAT_ENGINE = "gepeto"
 #GPT_MODEL = 'gpt-4'
 # GPT_CHAT_ENGINE = "dictador"
 
-if "messages" not in st.session_state:
-  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
-
 
 st.title("Chatbot")
 is_pdf_chatbot = st.checkbox("PDF chatbot")
@@ -46,25 +43,24 @@ if uploaded_file is not None:
     st.success("¡Archivo PDF procesado exitosamente!")
     pdf_file.close()
 
+if "messages" not in st.session_state:
+  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+
 for msg in st.session_state["messages"]:
   st.chat_message(msg["role"]).write(msg["content"])
 
 if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
-
-  if is_pdf_chatbot and uploaded_file is not None:
-    responseMessage = pdf_gpt.get_answer(docsearch,user_input,api_key)
-  else:
-    response = openai.ChatCompletion.create(
-        model=GPT_MODEL,
-        messages=st.session_state["messages"],
-        engine=GPT_CHAT_ENGINE,
-        max_tokens=DIMENSION
-    )
-    responseMessage = response['choices'][0]['message']['content']
-    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-    st.chat_message("assistant").write(responseMessage)
+  response = openai.ChatCompletion.create(
+      model=GPT_MODEL,
+      messages=st.session_state["messages"],
+      engine=GPT_CHAT_ENGINE,
+      max_tokens=DIMENSION
+  )
+  responseMessage = response['choices'][0]['message']['content']
+  st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+  st.chat_message("assistant").write(responseMessage)
   
 
  
