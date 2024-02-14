@@ -62,8 +62,9 @@ if user_input := st.chat_input():
         engine=GPT_CHAT_ENGINE,
         max_tokens=DIMENSION
     )
-  responseMessage = response['choices'][0]['message']['content']
-  st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-  st.chat_message("assistant").write(responseMessage)
+    responseMessage = response['choices'][0]['message']['content']
+    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+    st.chat_message("assistant").write(responseMessage)
+  
 
  
