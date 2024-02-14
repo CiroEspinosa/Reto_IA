@@ -62,5 +62,5 @@ if user_input := st.chat_input():
       max_tokens=DIMENSION
   )
   responseMessage = response['choices'][0]['message']['content']
-  st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-  st.chat_message("assistant").write(responseMessage)
+st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+st.chat_message("assistant").write(responseMessage)
