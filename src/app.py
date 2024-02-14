@@ -53,6 +53,7 @@ if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
   st.write()
 else:
+  st.write()
   for msg in st.session_state["messages"]:
     st.chat_message(msg["role"]).write(msg["content"])
 
