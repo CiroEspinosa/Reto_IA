@@ -68,7 +68,7 @@ try:
     st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
     st.chat_message("assistant").write(responseMessage)
 except Exception as e:
-  st.checkbox()
+  st.checkbox(" ")
   for msg in st.session_state["messages"]:
     st.chat_message(msg["role"]).write(msg["content"])
 
