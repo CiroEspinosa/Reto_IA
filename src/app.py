@@ -27,8 +27,8 @@ EMBEDDING_MODEL = "text-embedding-ada-002"
 GPT_EMBEDDING_ENGINE = 'mondongodb'
 DIMENSION = 1536
 # GPT_MODEL = 'gpt-3.5-turbo-16k'
-# GPT_CHAT_ENGINE = "gepeto"
-GPT_MODEL = 'gpt-4'
+GPT_CHAT_ENGINE = "gepeto"
+#GPT_MODEL = 'gpt-4'
 GPT_CHAT_ENGINE = "dictador"
 
 
