@@ -28,19 +28,33 @@ GPT_EMBEDDING_ENGINE = 'mondongodb'
 DIMENSION = 1536
 GPT_MODEL = 'gpt-3.5-turbo-16k'
 GPT_CHAT_ENGINE = "gepeto"
-#GPT_MODEL = 'gpt-4'
+# GPT_MODEL = 'gpt-4'
 # GPT_CHAT_ENGINE = "dictador"
 
+def chat():
+  if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 
-  
+  for msg in st.session_state["messages"]:
+    st.chat_message(msg["role"]).write(msg["content"])
 
+
+  if user_input := st.chat_input():
+    st.session_state["messages"].append({"role": "user", "content": user_input})
+    st.chat_message("user").write(user_input)
+    response = openai.ChatCompletion.create(
+        model=GPT_MODEL,
+        messages=st.session_state["messages"],
+        engine=GPT_CHAT_ENGINE,
+        max_tokens=DIMENSION
+    )
+    responseMessage = response['choices'][0]['message']['content']
+    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+    st.chat_message("assistant").write(responseMessage)
 
 st.title("Chatbot")
 
 is_pdf_chatbot = st.checkbox("PDF chatbot")
-
-if "messages" not in st.session_state:
-  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 
 if is_pdf_chatbot:
   uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
@@ -52,22 +66,8 @@ if is_pdf_chatbot:
       st.success("¡Archivo PDF procesado exitosamente!")
       pdf_file.close()
 
+      chat()
 
 
+chat()
 
-for msg in st.session_state["messages"]:
-  st.chat_message(msg["role"]).write(msg["content"])
-
-
-if user_input := st.chat_input():
-  st.session_state["messages"].append({"role": "user", "content": user_input})
-  st.chat_message("user").write(user_input)
-  response = openai.ChatCompletion.create(
-      model=GPT_MODEL,
-      messages=st.session_state["messages"],
-      engine=GPT_CHAT_ENGINE,
-      max_tokens=DIMENSION
-  )
-  responseMessage = response['choices'][0]['message']['content']
-  st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-  st.chat_message("assistant").write(responseMessage)
