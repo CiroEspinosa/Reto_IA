@@ -39,6 +39,9 @@ st.title("Chatbot")
 
 is_pdf_chatbot = st.checkbox("PDF chatbot")
 
+if "messages" not in st.session_state:
+  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+
 if is_pdf_chatbot:
   uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
 
@@ -48,11 +51,9 @@ if is_pdf_chatbot:
       docsearch = pdf_gpt.process_pdf(pdf_file,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME, DIMENSION)
       st.success("¡Archivo PDF procesado exitosamente!")
       pdf_file.close()
-  
 
 
-if "messages" not in st.session_state:
-  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+
 
 for msg in st.session_state["messages"]:
   st.chat_message(msg["role"]).write(msg["content"])
@@ -68,11 +69,5 @@ if user_input := st.chat_input():
       max_tokens=DIMENSION
   )
   responseMessage = response['choices'][0]['message']['content']
-  if "messages" in st.session_state:
-    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-    st.chat_message("assistant").write(responseMessage)
-  else:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
-    st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
-    st.chat_message("assistant").write(responseMessage)
-    
+  st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
+  st.chat_message("assistant").write(responseMessage)
