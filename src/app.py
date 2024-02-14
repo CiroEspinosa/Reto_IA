@@ -11,7 +11,6 @@ PINECONE_API_KEY = st.secrets["PINECONE_API_KEY_V2"]
 PINECONE_ENV = st.secrets["PINECONE_ENV"]
 PINECONE_INDEX_NAME = st.secrets["PINECONE_INDEX_NAME"]
 
-pc = Pinecone(api_key=PINECONE_API_KEY)
 
 api_key = st.secrets["OPENAI_API_KEY"]
 api_base = st.secrets["OPENAI_API_BASE"]
@@ -68,4 +67,4 @@ if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
   st.chat_message("assistant").write(responseMessage)
 
-#pinecone.deinit()  
+ 

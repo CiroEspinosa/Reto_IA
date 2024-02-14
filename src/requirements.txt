@@ -2,15 +2,6 @@ openai==0.28
 requests==2.26.0
 streamlit
 pinecone-client
-opencv-python
 langchain
-unstructured
 langchain-community
-PyPDF2
-unstructured
-unstructured[local-inference]
-tiktoken
-uvicorn
-flask
-Werkzeug
-gunicorn
+pdfplumber
