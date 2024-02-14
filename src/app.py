@@ -38,9 +38,7 @@ st.title("Chatbot")
 is_pdf_chatbot = st.checkbox("PDF chatbot")
 uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
 
-
-if "messages" not in st.session_state:
-  st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
+st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 
 
 for msg in st.session_state["messages"]:
@@ -66,6 +64,3 @@ if user_input := st.chat_input():
   responseMessage = response['choices'][0]['message']['content']
   st.session_state["messages"].append({"role": "assistant", "content": responseMessage})
   st.chat_message("assistant").write(responseMessage)
-  
-
- 
