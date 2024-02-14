@@ -3,7 +3,7 @@ import streamlit as st
 import pdf_gpt
 from pinecone import Pinecone, ServerlessSpec
 import os
-
+from io import BytesIO
 
 
 
@@ -12,9 +12,6 @@ PINECONE_ENV = st.secrets["PINECONE_ENV"]
 PINECONE_INDEX_NAME = st.secrets["PINECONE_INDEX_NAME"]
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
-
-
-ruta_pdf = os.path.join("pdf", "ConstitucionCASTELLANO.pdf")
 
 api_key = st.secrets["OPENAI_API_KEY"]
 api_base = st.secrets["OPENAI_API_BASE"]
@@ -38,6 +35,15 @@ GPT_CHAT_ENGINE = "dictador"
 
 st.title("Chatbot")
 is_pdf_chatbot = st.checkbox("PDF chatbot")
+uploaded_file = st.file_uploader("Sube tu archivo PDF", type="pdf")
+
+if uploaded_file is not None:
+    pdf_bytes = uploaded_file.read()
+    pdf_file = BytesIO(pdf_bytes)
+    docsearch = pdf_gpt.process_pdf(pdf_bytes,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME)
+    st.success("¡Archivo PDF procesado exitosamente!")
+    pdf_file.close()
+
 if "messages" not in st.session_state:
   st.session_state["messages"] = [{"role": "assistant", "content": "Hola, soy ChatGPT, ¿En qué puedo ayudarte?"}]
 
@@ -48,8 +54,7 @@ if user_input := st.chat_input():
   st.session_state["messages"].append({"role": "user", "content": user_input})
   st.chat_message("user").write(user_input)
 
-  if is_pdf_chatbot:
-    docsearch = pdf_gpt.process_pdf(ruta_pdf,api_key,PINECONE_API_KEY,PINECONE_ENV,PINECONE_INDEX_NAME)
+  if is_pdf_chatbot and uploaded_file is not None:
     responseMessage = pdf_gpt.get_answer(docsearch,user_input,api_key)
   else:
     response = openai.ChatCompletion.create(
